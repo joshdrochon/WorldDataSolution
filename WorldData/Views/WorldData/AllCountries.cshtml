@@ -1,0 +1,25 @@
+
+<style media="screen">
+
+  th{
+    border: 1px solid black;
+    max-width: 250px;
+    max-height: 50px;
+  }
+</style>
+
+
+@using WorldDataProject.Models;
+
+<a href="sort by p"></a>
+
+<h1>Here are all the countries in the DATABASE:</h1>
+@foreach (Country country in Country.GetAll())
+{
+  <table>
+    <th>@country.GetCode()</th>
+    <th>@country.GetName()</th>
+    <th>@country.GetContinent()</th>
+    <th>@country.GetPopulation()</th>
+  </table>
+}
