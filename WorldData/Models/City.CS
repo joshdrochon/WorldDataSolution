@@ -7,15 +7,14 @@ namespace WorldDataProject.Models
 {
   public class City
   {
-    private static List<City> _allCities;
     private int _id; //index 0 - int
     private string _name; //index 1 - char
     private string _district; //index 3 -char
-    private string _population;//index 4 -int
+    private int _population;//index 4 -int
 
     public City(int Id, string Name, string District, int Population)
     {
-      _id = ID;
+      _id = Id;
       _name = Name;
       _district = District;
       _population = Population;
@@ -38,7 +37,7 @@ namespace WorldDataProject.Models
     }
     public void SetName(string newName)
     {
-      _name = Name;
+      _name = newName;
     }
 
     //_district getter/setter
@@ -63,6 +62,7 @@ namespace WorldDataProject.Models
 
     public static List<City> GetAll()
     {
+      List<City> allCities = new List<City>();
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
@@ -71,11 +71,11 @@ namespace WorldDataProject.Models
       while(rdr.Read())
       {
         int cityId = rdr.GetInt32(0);
-        int cityName = rdr.GetString(1);
-        int cityDistrict = rdr.GetString(3);
-        int cityPopulation = rdr.GetString(4);
-        City newCity = newCity(cityId, cityName, cityDistrict, cityPopulation);
-        _allCities.Add(newCity);
+        string cityName = rdr.GetString(1);
+        string cityDistrict = rdr.GetString(3);
+        int cityPopulation = rdr.GetInt32(4);
+        City newCity = new City(cityId, cityName, cityDistrict, cityPopulation);
+        allCities.Add(newCity);
       }
 
       conn.Close();
@@ -101,7 +101,6 @@ namespace WorldDataProject.Models
       {
         conn.Dispose();
       }
-      allCities.Clear();
     }
 
   }//end class

@@ -7,7 +7,6 @@ namespace WorldDataProject.Models
 {
   public class Country
   {
-    private static List<Country> _allCountries; //getAll method will return this list
     private string _code; //[0]
     private string _name; //[1]
     private string _continent; //[2]
@@ -65,6 +64,7 @@ namespace WorldDataProject.Models
 
     public static List<Country> GetAll() /*returns a List which contains Country objects*/
     {
+        List<Country> allCountries = new List<Country>();
         MySqlConnection conn = DB.Connection(); //MySqlConnection represents database, calling DB.Connection establishes a connection w/ mysql database
         conn.Open(); //opens the connection
         MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
@@ -77,7 +77,7 @@ namespace WorldDataProject.Models
           string countryCont = rdr.GetString(2);
           int countryPop = rdr.GetInt32(6);
           Country newCountry = new Country(countryCode, countryName, countryCont, countryPop);
-          _allCountries.Add(newCountry);
+          allCountries.Add(newCountry);
         }
         conn.Close();
         if (conn != null)
@@ -102,7 +102,6 @@ namespace WorldDataProject.Models
       {
           conn.Dispose();
       }
-      _allCountries.Clear();
     }
   }
 }

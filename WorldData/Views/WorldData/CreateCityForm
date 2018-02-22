@@ -1,0 +1,8 @@
+<h1>Add a new City:</h1>
+<form action ="WorldDataProject/AllCities" method="post">
+  City ID:<input type="number" name="city-id">
+  City Name:<input type="text" name="city-name">
+  City District:<input type="text" name="city-district">
+  City Population: <input type="number" name="city=population">
+  <button type="submit" name="button">Submit!</button>
+</form>

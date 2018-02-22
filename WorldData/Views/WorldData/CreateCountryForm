@@ -1,0 +1,7 @@
+<h1>Add a new Country:</h1>
+<form action ="WorldDataProject/AllCountries" method="post">
+  Country Code:<input type="text" name="country-code">
+  Country Name:<input type="text" name="country-name">
+  Country Continent:<input type="text" name="country-continent">
+  Country Population:<input type="text" name="country-population">
+</form>

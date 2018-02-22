@@ -1,8 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using WorldDataProject.Models;
 using WorldDataProject;
+using System;
 
 namespace WorldDataProject.Tests
 {
@@ -26,6 +26,7 @@ namespace WorldDataProject.Tests
     {
       //Arrange, Act
       int result = Country.GetAll().Count;
+      Console.WriteLine("Line 29 " + result);
       //Assert
       Assert.AreEqual(0, result);
     }
