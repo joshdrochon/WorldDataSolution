@@ -1,0 +1,13 @@
+@using WorldDataProject.Models;
+
+<h1>Here are all the cities in the DATABSE:</h1>
+
+@foreach (City city in City.GetAll())
+{
+  <table>
+    <th>@city.GetId()</th>
+    <th>@city.GetName()</th>
+    <th>@city.GetDistrict()</th>
+    <th>@city.GetPopulation()</th>
+  </table>
+}
