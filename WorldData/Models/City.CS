@@ -20,6 +20,26 @@ namespace WorldDataProject.Models
       _population = Population;
     }
 
+
+    public override bool Equals(System.Object otherCity)
+    {
+      if (!(otherCity is City))
+      {
+      return false;
+      }
+      else
+      {
+        City newCity = (City) otherCity;
+        bool idEquality = (this.GetId() == newCity.GetId());
+        bool nameEquality = (this.GetName() == newCity.GetName());
+        bool districtEquality = (this.GetDistrict() == newCity.GetDistrict());
+        bool popEquality = (this.GetPopulation() == newCity.GetPopulation());
+
+        return (idEquality && nameEquality && districtEquality && popEquality);
+      }
+    }
+
+
     //_id getter/setter
     public int GetId()
     {
@@ -66,7 +86,7 @@ namespace WorldDataProject.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM city;";
+      cmd.CommandText = @"SELECT * FROM city WHERE ID < 60;";
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
@@ -95,6 +115,61 @@ namespace WorldDataProject.Models
       cmd.CommandText = @"DELETE FROM city;";
 
       cmd.ExecuteNonQuery();
+
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    public void Save()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+
+      //_id
+      cmd.CommandText = @"INSERT INTO 'city' ('id')
+      VALUES (@cityId);";
+
+      MySqlParameter id = new MySqlParameter();
+      id.ParameterName = "@cityId";
+      id.Value = this._id;
+      cmd.Parameters.Add(id);
+
+      //_name
+      cmd.CommandText = @"INSERT INTO 'city' ('name')
+      VALUES (@cityName);";
+
+      MySqlParameter name = new MySqlParameter();
+      name.ParameterName = "@cityName";
+      name.Value = this._name;
+      cmd.Parameters.Add(name);
+
+      //_district
+      cmd.CommandText = @"INSERT INTO 'city' ('district')
+      VALUES (@cityDistrict);";
+
+      MySqlParameter district = new MySqlParameter();
+      district.ParameterName = "@cityDistrict";
+      district.Value = this._district;
+      cmd.Parameters.Add(district);
+
+      //_population
+      cmd.CommandText = @"INSERT INTO 'city' ('population')
+      VALUES (@cityPopulation);";
+
+      MySqlParameter population = new MySqlParameter();
+      population.ParameterName = "@cityPopulation";
+      population.Value = this._population;
+      cmd.Parameters.Add(population);
+
+
+      cmd.ExecuteNonQuery();
+
+      //more logic
 
       conn.Close();
       if(conn != null)

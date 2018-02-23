@@ -1,6 +1,6 @@
 @using WorldDataProject.Models;
 
-<h1>Here are all the cities in the DATABSE:</h1>
+<h1>Here are all the cities in the DATABASE:</h1>
 
 @foreach (City city in City.GetAll())
 {
@@ -11,3 +11,5 @@
     <th>@city.GetPopulation()</th>
   </table>
 }
+
+<a href="CreateCityForm">Add City</a>

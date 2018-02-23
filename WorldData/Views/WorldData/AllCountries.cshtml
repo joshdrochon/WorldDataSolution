@@ -11,7 +11,7 @@
 
 @using WorldDataProject.Models;
 
-<a href="sort by p"></a>
+
 
 <h1>Here are all the countries in the DATABASE:</h1>
 @foreach (Country country in Country.GetAll())
@@ -23,3 +23,5 @@
     <th>@country.GetPopulation()</th>
   </table>
 }
+
+  <a href="WorldData/CreateCountryForm">Add Country</a>

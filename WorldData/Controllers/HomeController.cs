@@ -12,10 +12,5 @@ namespace WorldDataProject.Controllers
       return View();
     }
 
-    [HttpGet("WorldData/AllCountries")]
-    public ActionResult AllCountries()
-    {
-      return View("../WorldData/AllCountries");
-    }
   }
 }
